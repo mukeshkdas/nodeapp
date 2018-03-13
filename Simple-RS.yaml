@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: web-rs
+  labels:
+    name: web
+    env: dev
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: web  
+  template:
+    metadata:
+      labels:
+        name: web
+        env: dev
+    spec:
+      containers:
+      - name: hello-node
+        image: hello-node:v1
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
